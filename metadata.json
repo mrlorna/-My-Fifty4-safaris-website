@@ -1,0 +1,7 @@
+{
+  "name": "Fifty4 Safaris",
+  "description": "Fifty4 Safaris Limited — East Africa & Uganda Premier Safari Operator. Discover Africa. Protect Its Future.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
