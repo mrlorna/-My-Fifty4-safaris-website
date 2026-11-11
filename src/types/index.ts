@@ -7,11 +7,15 @@ export type PageView =
   | 'tailor-trip'
   | 'travel-styles'
   | 'guides-faqs'
+  | 'faqs'
   | 'about'
   | 'contact'
   | 'offers'
   | 'subscribe'
-  | 'concierge-portal';
+  | 'concierge-portal'
+  | 'visas'
+  | 'gallery'
+  | 'referral';
 
 export interface SafariEnquiry {
   id: string;
@@ -24,8 +28,13 @@ export interface SafariEnquiry {
   dateFlexibility: 'Exact Dates' | '+/- 3 Days' | '+/- 1 Week' | 'Flexible Season';
   adults: number;
   children: number;
-  accommodationStyle: 'Luxury Eco-Lodges' | 'Mid-Range Classic Tented' | 'Ultra-Luxury Private Villas';
-  budgetPerPerson: string;
+  accommodationStyle:
+    | 'Budget Safari Accommodation'
+    | 'Mid-Range Comfort (Average Price)'
+    | 'Luxury Eco-Lodges'
+    | 'Ultra-Luxury Private Villas'
+    | 'Mid-Range Classic Tented';
+  budgetPerPerson?: string;
   currency: 'USD' | 'EUR' | 'GBP';
   wildlifeInterests: string[];
   fullName: string;

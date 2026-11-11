@@ -103,7 +103,7 @@ export const TRAVEL_STYLES_DATA: TravelStyleInfo[] = [
       'Complimentary honeymoon amenities (chilled champagne, couples massage, private bush dinners)',
       'Secluded villas with private decks and panoramic vistas',
       'Seamless combinations of exhilarating wildlife and peaceful Indian Ocean beaches',
-      'Tailor-made surprises arranged by our on-the-ground safari concierge'
+      'Tailor-made experiences arranged by our on-the-ground safari team'
     ]
   },
   {

@@ -22,12 +22,11 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
       id: 'gorillas-savannah-uganda',
       title: 'Classic Gorillas & Savannah',
       duration: '10 days / 9 nights',
-      price: 'From $3,400',
       badge: 'Uganda Bestseller',
       image: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
       description: 'The premier East African safari circuit: intimate mountain gorilla tracking in Bwindi Impenetrable Forest, savannah game drives in Queen Elizabeth, and Kazinga boat cruises.',
       highlights: [
-        'Guaranteed UWA Mountain Gorilla Permit included ($800 value)',
+        'Guaranteed UWA Mountain Gorilla Permit included',
         'Ishasha tree-climbing lions & Kazinga Channel wildlife cruise',
         'Chimpanzee tracking in Kibale tropical rainforest',
         'Private 4x4 Land Cruiser with pop-up photography roof'
@@ -38,7 +37,6 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
       id: 'serengeti-mara-migration',
       title: 'Timeless Serengeti & Mara',
       duration: '12 days / 11 nights',
-      price: 'From $4,200',
       badge: 'Great Migration',
       image: '/src/assets/images/serengeti_great_migration_1792866692098.jpg',
       description: 'Witness millions of wildebeest and zebras traverse the vast plains of Serengeti and Masai Mara, with private access to prime river crossing points.',
@@ -54,7 +52,6 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
       id: 'queen-elizabeth-wildlife',
       title: 'Tree-Climbing Lions Safari',
       duration: '8 days / 7 nights',
-      price: 'From $2,700',
       badge: 'Wildlife Focus',
       image: '/src/assets/images/queen_elizabeth_savannah_lions_1792866692167.jpg',
       description: 'Discover Queen Elizabeth National Park’s rare fig tree-climbing lions, hundreds of hippos on Kazinga Channel, and misty volcanic crater rims beneath the Rwenzori Mountains.',
@@ -70,7 +67,6 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
       id: 'rwanda-primate-sanctuary',
       title: 'Rwanda Volcanoes & Primates',
       duration: '7 days / 6 nights',
-      price: 'From $3,900',
       badge: 'Ultra Luxury',
       image: '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg',
       description: 'Exclusive high-end primate journey beneath the Virunga calderas, staying in ultra-luxury eco-lodges with personal butler service and private helicopter transfers.',
@@ -86,7 +82,6 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
       id: 'murchison-nile-falls',
       title: 'Murchison Falls Explorer',
       duration: '6 days / 5 nights',
-      price: 'From $2,100',
       badge: 'Classic Explorer',
       image: '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg',
       description: 'Uganda’s oldest national park where the mighty River Nile explodes through an 8-meter gorge into the Albert Nile with Rothschild giraffes and rhinos.',
@@ -162,34 +157,36 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
                   className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700 filter brightness-108 contrast-105 saturate-125"
                 />
 
-                {/* Resting State: Subtle Bottom Gradient for Title, Duration & Price Readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+                {/* Resting State: Subtle Bottom Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
 
-                {/* Resting Bottom Bar (Just one title on the image + duration & Check Prices button) */}
-                <div className="relative z-10 p-5 text-white transition-opacity duration-300 group-hover:opacity-0">
-                  <h3 className="font-serif-luxury text-xl sm:text-2xl font-bold text-white mb-2 leading-snug drop-shadow-md">
+                {/* Resting Explore Tour Card (Floats neatly inside the general card with margins on desktop) */}
+                <div className="relative z-10 m-3 sm:m-3.5 p-4 rounded-xl bg-black/65 backdrop-blur-md border border-white/20 text-white transition-opacity duration-300 group-hover:opacity-0 shadow-lg">
+                  <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-white mb-2 leading-snug drop-shadow-md">
                     {tour.title}
                   </h3>
 
-                  <div className="flex items-center justify-between text-xs text-white/95 pt-2 border-t border-white/20">
-                    <span className="font-semibold text-xs sm:text-sm drop-shadow-md tracking-wide">{tour.duration}</span>
+                  <div className="flex items-center justify-between gap-2 text-xs text-white/95 pt-2.5 border-t border-white/20">
+                    <span className="font-semibold text-xs sm:text-sm drop-shadow-md tracking-wide whitespace-nowrap shrink-0">
+                      {tour.duration}
+                    </span>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         onSelectTour(tour.id);
                       }}
-                      className="font-bold text-xs text-[#16422b] bg-[#FAF7EE] hover:bg-white px-2.5 sm:px-3 py-1 rounded shadow-md border border-white/40 flex items-center gap-1.5 cursor-pointer transition-transform active:scale-95"
+                      className="font-bold text-xs text-[#16422b] bg-[#FAF7EE] hover:bg-white px-2.5 sm:px-3 py-1.5 rounded shadow-md border border-white/40 flex items-center gap-1 cursor-pointer transition-all active:scale-95 whitespace-nowrap shrink-0"
                     >
-                      <span className="font-serif-luxury font-extrabold">{tour.price}</span>
-                      <span className="text-[10px] font-black uppercase tracking-wider bg-[#16422b] text-white px-1.5 py-0.5 rounded">
-                        Check Prices
+                      <span className="text-[11px] font-bold uppercase tracking-wider whitespace-nowrap leading-none">
+                        Explore Tour
                       </span>
+                      <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                     </button>
                   </div>
                 </div>
 
-                {/* Interactive Hover Reveal: Rich Information Overlay (Deep Forest Green & Luxury Cream) */}
-                <div className="absolute inset-0 z-20 bg-[#16422b]/95 p-6 flex flex-col justify-between text-white opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-xs">
+                {/* Interactive Hover Reveal: Floats within the general card with margin so it never touches the outer edge */}
+                <div className="absolute inset-2.5 sm:inset-3 z-20 bg-[#16422b]/95 p-5 sm:p-6 rounded-lg flex flex-col justify-between text-white opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-xs shadow-2xl border border-white/15">
                   {/* Top: Badge + Title + Description */}
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
@@ -202,11 +199,11 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
                       </span>
                     </div>
 
-                    <h3 className="font-serif-luxury text-2xl font-bold text-white mb-2 leading-tight">
+                    <h3 className="font-serif-luxury text-xl sm:text-2xl font-bold text-white mb-2 leading-tight">
                       {tour.title}
                     </h3>
 
-                    <p className="text-xs text-white/90 leading-relaxed mb-4 font-light">
+                    <p className="text-xs text-white/90 leading-relaxed mb-3 font-light line-clamp-3">
                       {tour.description}
                     </p>
 
@@ -224,14 +221,11 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
                     </div>
                   </div>
 
-                  {/* Bottom: Price + Button CTA (Crisp White Price & Warm Luxury Cream Button) */}
+                  {/* Bottom: Season + Button CTA */}
                   <div className="pt-3 border-t border-white/20">
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <span className="text-[10px] uppercase text-emerald-300 font-semibold block">All-Inclusive</span>
-                        <span className="font-serif-luxury text-2xl font-extrabold text-white">{tour.price}</span>
-                      </div>
-                      <span className="text-[10px] text-white bg-white/15 px-2.5 py-1 rounded flex items-center gap-1 border border-white/15">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[11px] text-white/90 font-medium">Bespoke Guided Itinerary</span>
+                      <span className="text-[10px] text-white bg-white/15 px-2 py-0.5 rounded flex items-center gap-1 border border-white/15">
                         <Calendar className="w-3 h-3 text-emerald-300" />
                         <span>{tour.season}</span>
                       </span>
@@ -242,7 +236,7 @@ export const FeaturedSafaris: React.FC<FeaturedSafarisProps> = ({
                         e.stopPropagation();
                         onSelectTour(tour.id);
                       }}
-                      className="w-full py-2.5 bg-[#FAF7EE] hover:bg-white text-[#16422b] border border-white/30 text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95"
+                      className="w-full py-2 bg-[#FAF7EE] hover:bg-white text-[#16422b] border border-white/30 text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95"
                     >
                       <span>View Full Safari Itinerary</span>
                       <ArrowRight className="w-3.5 h-3.5" />

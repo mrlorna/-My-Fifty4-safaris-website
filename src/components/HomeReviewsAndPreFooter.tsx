@@ -19,37 +19,38 @@ export const HomeReviewsAndPreFooter: React.FC<HomeReviewsAndPreFooterProps> = (
   onOpenBrochure
 }) => {
   const [activeReviewPage, setActiveReviewPage] = useState(0);
+  const [expandedReviews, setExpandedReviews] = useState<Record<number, boolean>>({});
 
   const REVIEWS = [
     {
-      initials: 'SM',
-      initialBg: 'bg-orange-500',
-      name: 'Sarah Montgomery',
+      initials: 'M',
+      initialBg: 'bg-[#16422b]',
+      name: 'Montgomery',
       verified: true,
       timeAgo: '27 days ago',
       rating: 5,
-      text: 'We were a private tour group of 4 on a bespoke trip to Uganda and Rwanda. The itinerary and luxury eco-lodges were exceptional. Julius our guide was phenomenal and made sure every detail was perfect.',
-      photo: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg'
+      text: 'We enjoyed our safari in Kenya and Uganda so much. Traveling across both countries with Fifty4 Safaris felt like traveling with family from day one. In Kenya, watching the elephant herds roam right beneath Mount Kilimanjaro was breathtaking, and when we crossed into Uganda for mountain gorilla trekking in Bwindi, our lead naturalist guide made sure we were comfortable and safe every minute of the hike. Every single lodge, transfer, and meal was arranged with so much personal care and warmth. We cannot thank the team enough for memories we will hold close forever.',
+      photo: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.13_c6b09cce.jpeg'
     },
     {
-      initials: 'JC',
-      initialBg: 'bg-orange-600',
-      name: 'John Campbell',
+      name: 'Rasheem',
+      initials: 'R',
+      initialBg: 'bg-emerald-700',
       verified: true,
       timeAgo: '3 months ago',
       rating: 5,
-      text: 'It was a wonderful experience. Fifty4 Safaris staff, especially the Kampala booking architects, were very helpful and made sure we secured our peak gorilla permits and Serengeti migration camps.',
-      photo: '/src/assets/images/queen_elizabeth_savannah_lions_1792866692167.jpg'
+      text: 'We enjoyed hiking the hills and exploring the lush green with our tour guide Lorna—she is such a lovely, caring soul. From the early morning mist on the trails to the heartfelt stories she shared about the local community and nature, she kept our spirits high every single mile. When the trail got steep, Lorna was right there cheering us on, laughing with us, and making the journey unforgettable. Fifty4 Safaris gave us an authentic, grounded experience that felt truly special.',
+      photo: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.31__1__4b878806.jpeg'
     },
     {
-      initials: 'VH',
+      initials: 'I',
       initialBg: 'bg-teal-700',
-      name: 'Vinh Hong',
+      name: 'Irene',
       verified: true,
       timeAgo: '4 months ago',
       rating: 5,
-      text: 'Remarkable adventure from start to finish. The custom 4x4 pop-up roof vehicle and knowledgeable ranger guides gave us wildlife sightings we will never forget. Highly recommended!',
-      photo: '/src/assets/images/serengeti_great_migration_1792866692098.jpg'
+      text: 'We truly enjoyed every moment, had so much fun, and surely recommend Fifty4 Safaris to anyone thinking of visiting East Africa! Our time reaching Murchison Falls to feel the roaring water up close, followed by the boat cruise and open-roof game drives, was pure magic. The team made us feel so welcomed right from the airport arrival to our very last farewell. The care was genuine and authentic—we are already telling our friends and planning our next trip!',
+      photo: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.38__1__741c8dd3.jpeg'
     }
   ];
 
@@ -156,21 +157,27 @@ export const HomeReviewsAndPreFooter: React.FC<HomeReviewsAndPreFooterProps> = (
                       ))}
                     </div>
 
-                    {/* Review Text */}
-                    <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-                      {rev.text}{' '}
-                      <button className="text-neutral-500 hover:text-black font-semibold text-xs underline cursor-pointer">
-                        Read more
+                    {/* Review Text: 4 lines showing, expand with Read more */}
+                    <div className="mb-4">
+                      <p className={`text-sm text-neutral-700 leading-relaxed ${!expandedReviews[i] ? 'line-clamp-4' : ''}`}>
+                        {rev.text}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setExpandedReviews((prev) => ({ ...prev, [i]: !prev[i] }))}
+                        className="text-neutral-500 hover:text-[#16422b] font-semibold text-xs underline cursor-pointer mt-1.5"
+                      >
+                        {expandedReviews[i] ? 'Read less' : 'Read more'}
                       </button>
-                    </p>
+                    </div>
                   </div>
 
-                  {/* Attached Trip Photo Thumbnail */}
+                  {/* Attached Trip Photo Thumbnail (natural look) */}
                   <div className="h-44 rounded-md overflow-hidden border border-neutral-200 mt-2">
                     <img
                       src={rev.photo}
                       alt={`${rev.name} safari review`}
-                      className="w-full h-full object-cover filter brightness-105 contrast-105 saturate-115"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>

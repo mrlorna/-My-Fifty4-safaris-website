@@ -10,6 +10,10 @@ import {
   Search,
   Clock,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Printer,
+  Download,
   MessageCircle,
   FileText,
   ShieldCheck,
@@ -38,6 +42,8 @@ export const GuidesAndFaqsPage: React.FC<GuidesAndFaqsPageProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<InfoTab>('visas');
   const [selectedArticle, setSelectedArticle] = useState<ArticleInfo | null>(null);
+  const [journalPage, setJournalPage] = useState<number>(1);
+  const [expandedStoryIds, setExpandedStoryIds] = useState<Record<string, boolean>>({});
   const [faqCategory, setFaqCategory] = useState<string>('All');
   const [faqSearch, setFaqSearch] = useState('');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -101,7 +107,6 @@ export const GuidesAndFaqsPage: React.FC<GuidesAndFaqsPageProps> = ({
             { id: 'before-your-trip', label: 'Before Your Trip', icon: Luggage },
             { id: 'protection', label: 'Travel Protection Plan', icon: ShieldCheck },
             { id: 'journal', label: 'Journal & Stories', icon: BookOpen },
-            { id: 'referral', label: 'Referral Program', icon: Gift },
             { id: 'faqs', label: 'FAQ’s', icon: HelpCircle },
             { id: 'inspiration', label: 'Inspiration', icon: Compass }
           ].map((tab) => {
@@ -131,16 +136,24 @@ export const GuidesAndFaqsPage: React.FC<GuidesAndFaqsPageProps> = ({
         {activeTab === 'visas' && (
           <div className="space-y-8 animate-fade-in">
             <div className="bg-white rounded-2xl p-6 sm:p-10 border border-neutral-200 shadow-sm space-y-6">
-              <div className="flex items-center gap-3 pb-4 border-b border-neutral-100">
-                <FileText className="w-6 h-6 text-[#16422b]" />
-                <div>
-                  <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#151713]">
-                    East Africa Visas & Passport Requirements
-                  </h2>
-                  <p className="text-xs text-neutral-500">
-                    Official protocols for travelers entering Uganda, Kenya, Tanzania, and Rwanda
-                  </p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
+                <div className="flex items-center gap-3">
+                  <FileText className="w-6 h-6 text-[#16422b]" />
+                  <div>
+                    <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#151713]">
+                      East Africa Visas & Passport Requirements
+                    </h2>
+                    <p className="text-xs text-neutral-500">
+                      Official protocols for travelers entering Uganda, Kenya, Tanzania, and Rwanda
+                    </p>
+                  </div>
                 </div>
+                <button
+                  onClick={() => onNavigate('visas')}
+                  className="px-4 py-2 bg-[#16422b] hover:bg-[#103321] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
+                >
+                  View Interactive Directory →
+                </button>
               </div>
 
               {/* Notice Box */}
@@ -464,112 +477,277 @@ export const GuidesAndFaqsPage: React.FC<GuidesAndFaqsPageProps> = ({
         )}
 
         {/* ================= TAB 4: JOURNAL & STORIES ================= */}
-        {activeTab === 'journal' && (
-          <div className="space-y-8 animate-fade-in">
-            {selectedArticle ? (
-              /* Single Article View */
-              <div className="bg-white rounded-2xl p-6 sm:p-10 border border-neutral-200 shadow-sm max-w-4xl mx-auto">
-                <button
-                  onClick={() => setSelectedArticle(null)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#16422b] mb-6 hover:underline cursor-pointer"
-                >
-                  &larr; Back to Safari Journal
-                </button>
+        {activeTab === 'journal' && (() => {
+          const storiesPerPage = 6;
+          const totalPages = Math.ceil(ARTICLES_DATA.length / storiesPerPage);
+          const startIndex = (journalPage - 1) * storiesPerPage;
+          const paginatedArticles = ARTICLES_DATA.slice(startIndex, startIndex + storiesPerPage);
 
-                <div className="h-72 rounded-xl overflow-hidden mb-6">
-                  <img
-                    src={selectedArticle.image}
-                    alt={selectedArticle.title}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
+          const handlePrintStory = (article: ArticleInfo) => {
+            const printWindow = window.open('', '_blank');
+            if (printWindow) {
+              printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                  <head>
+                    <title>${article.title} - Fifty4 Safaris Journal</title>
+                    <style>
+                      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif; padding: 40px; color: #1a1a1a; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+                      h1 { font-family: Georgia, serif; font-size: 26px; color: #16422b; margin-bottom: 8px; }
+                      .meta { font-size: 13px; color: #666; margin-bottom: 24px; border-bottom: 1px solid #ddd; padding-bottom: 12px; }
+                      p { font-size: 15px; margin-bottom: 14px; text-align: justify; }
+                      .brand { font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #16422b; margin-top: 30px; border-top: 1px solid #eee; padding-top: 12px; }
+                    </style>
+                  </head>
+                  <body>
+                    <div style="text-align: right; font-size: 11px; color: #888; text-transform: uppercase;">Fifty4 Safaris Travel Journal</div>
+                    <h1>${article.title}</h1>
+                    <div class="meta">
+                      <strong>${article.category}</strong> · ${article.readTime} · Published ${article.publishedDate} · By ${article.author}
+                    </div>
+                    ${article.content.map(p => `<p>${p}</p>`).join('')}
+                    <div class="brand">Fifty4 Safaris Limited · Discover Africa · fifty4safaris@gmail.com · 54safaris.com · +256764544719</div>
+                    <script>
+                      window.onload = function() { window.print(); }
+                    </script>
+                  </body>
+                </html>
+              `);
+              printWindow.document.close();
+            } else {
+              window.print();
+            }
+          };
 
-                <div className="flex items-center gap-3 text-xs text-neutral-500 mb-3">
-                  <span className="font-bold text-[#16422b] uppercase tracking-wider">
-                    {selectedArticle.category}
-                  </span>
-                  <span>·</span>
-                  <span>{selectedArticle.readTime}</span>
-                  <span>·</span>
-                  <span>{selectedArticle.publishedDate}</span>
-                  <span>·</span>
-                  <span>By {selectedArticle.author}</span>
-                </div>
+          return (
+            <div className="space-y-8 animate-fade-in">
+              {selectedArticle ? (
+                /* Single Article View */
+                <div className="bg-white rounded-2xl p-6 sm:p-10 border border-neutral-200 shadow-sm max-w-4xl mx-auto">
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <button
+                      onClick={() => setSelectedArticle(null)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#16422b] hover:underline cursor-pointer"
+                    >
+                      &larr; Back to Safari Journal
+                    </button>
 
-                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#151713] mb-6">
-                  {selectedArticle.title}
-                </h2>
+                    <button
+                      onClick={() => handlePrintStory(selectedArticle)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-neutral-300 hover:border-[#16422b] hover:bg-emerald-50 text-[#16422b] text-xs font-bold transition-colors cursor-pointer"
+                      title="Download / Print Story"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Download / Print Story</span>
+                    </button>
+                  </div>
 
-                <div className="space-y-4 text-sm text-neutral-700 leading-relaxed">
-                  {selectedArticle.content.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
-                </div>
+                  <div className="h-72 sm:h-96 rounded-xl overflow-hidden mb-6 bg-neutral-900">
+                    <img
+                      src={selectedArticle.image}
+                      alt={selectedArticle.title}
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
 
-                <div className="mt-8 pt-6 border-t border-neutral-200 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex flex-wrap gap-2">
-                    {selectedArticle.tags.map((tag, i) => (
-                      <span key={i} className="text-xs text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded">
-                        #{tag}
-                      </span>
+                  <div className="flex items-center gap-3 text-xs text-neutral-500 mb-3">
+                    <span className="font-bold text-[#16422b] uppercase tracking-wider">
+                      {selectedArticle.category}
+                    </span>
+                    <span>·</span>
+                    <span>{selectedArticle.readTime}</span>
+                    <span>·</span>
+                    <span>{selectedArticle.publishedDate}</span>
+                    <span>·</span>
+                    <span>By {selectedArticle.author}</span>
+                  </div>
+
+                  <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#151713] mb-6 leading-tight">
+                    {selectedArticle.title}
+                  </h2>
+
+                  <div className="space-y-4 text-sm sm:text-base text-neutral-700 leading-relaxed font-light">
+                    {selectedArticle.content.map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
                     ))}
                   </div>
 
-                  <button
-                    onClick={onOpenTailorTrip}
-                    className="px-5 py-2.5 bg-[#16422b] hover:bg-[#103321] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors cursor-pointer"
-                  >
-                    Craft a Journey Like This
-                  </button>
-                </div>
-              </div>
-            ) : (
-              /* Articles Grid */
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {ARTICLES_DATA.map((article) => (
-                  <div
-                    key={article.id}
-                    onClick={() => setSelectedArticle(article)}
-                    className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-xs hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between group"
-                  >
-                    <div>
-                      <div className="h-48 overflow-hidden">
-                        <img
-                          src={article.image}
-                          alt={article.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-105"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                      <div className="p-5">
-                        <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-2">
-                          <span className="font-bold text-[#16422b] uppercase tracking-wider">
-                            {article.category}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {article.readTime}
-                          </span>
-                        </div>
-                        <h3 className="font-serif-luxury text-xl font-bold text-[#151713] mb-2 group-hover:text-[#16422b] transition-colors leading-snug">
-                          {article.title}
-                        </h3>
-                        <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
-                          {article.summary}
-                        </p>
-                      </div>
+                  <div className="mt-8 pt-6 border-t border-neutral-200 flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-wrap gap-2">
+                      {selectedArticle.tags.map((tag, i) => (
+                        <span key={i} className="text-xs text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded">
+                          #{tag}
+                        </span>
+                      ))}
                     </div>
-                    <div className="px-5 pb-5 pt-2 flex items-center justify-between text-xs text-[#16422b] font-bold border-t border-neutral-100">
-                      <span>Read Story</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => handlePrintStory(selectedArticle)}
+                        className="px-4 py-2.5 border border-neutral-300 hover:border-neutral-800 text-neutral-800 text-xs font-bold uppercase tracking-wider rounded transition-colors cursor-pointer flex items-center gap-1.5"
+                      >
+                        <Printer className="w-3.5 h-3.5" />
+                        <span>Print</span>
+                      </button>
+                      <button
+                        onClick={onOpenTailorTrip}
+                        className="px-5 py-2.5 bg-[#16422b] hover:bg-[#103321] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors cursor-pointer"
+                      >
+                        Craft a Journey Like This
+                      </button>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+                </div>
+              ) : (
+                /* Articles Grid with Pagination and Inline Read More/Less */
+                <div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {paginatedArticles.map((article) => {
+                      const isExpanded = !!expandedStoryIds[article.id];
+
+                      return (
+                        <div
+                          key={article.id}
+                          className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group"
+                        >
+                          <div>
+                            <div
+                              onClick={() => setSelectedArticle(article)}
+                              className="h-48 overflow-hidden cursor-pointer"
+                            >
+                              <img
+                                src={article.image}
+                                alt={article.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-105"
+                                referrerPolicy="no-referrer"
+                              />
+                            </div>
+                            <div className="p-5">
+                              <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-2">
+                                <span className="font-bold text-[#16422b] uppercase tracking-wider">
+                                  {article.category}
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <Clock className="w-3 h-3" />
+                                  {article.readTime}
+                                </span>
+                              </div>
+                              <h3
+                                onClick={() => setSelectedArticle(article)}
+                                className="font-serif-luxury text-xl font-bold text-[#151713] mb-2 group-hover:text-[#16422b] transition-colors leading-snug cursor-pointer"
+                              >
+                                {article.title}
+                              </h3>
+
+                              {isExpanded ? (
+                                <div className="space-y-2 text-xs text-neutral-700 leading-relaxed font-light mt-2 animate-fade-in">
+                                  {article.content.map((p, i) => (
+                                    <p key={i}>{p}</p>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                                  {article.summary}
+                                </p>
+                              )}
+
+                              {/* Read More / Read Less Toggle & Download */}
+                              <div className="mt-3 flex items-center justify-between pt-2 border-t border-neutral-100 text-xs">
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setExpandedStoryIds((prev) => ({
+                                      ...prev,
+                                      [article.id]: !prev[article.id]
+                                    }));
+                                  }}
+                                  className="text-[#16422b] font-bold hover:underline cursor-pointer flex items-center gap-1"
+                                >
+                                  <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+                                  {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                                </button>
+
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handlePrintStory(article);
+                                  }}
+                                  className="text-neutral-500 hover:text-[#16422b] flex items-center gap-1 text-[11px] cursor-pointer"
+                                  title="Download / Print"
+                                >
+                                  <Download className="w-3 h-3" />
+                                  <span>PDF / Print</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            onClick={() => setSelectedArticle(article)}
+                            className="px-5 py-3.5 flex items-center justify-between text-xs text-[#16422b] font-bold border-t border-neutral-100 hover:bg-neutral-50 cursor-pointer"
+                          >
+                            <span>Open Full Story</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Pagination Controls after 6 stories */}
+                  {totalPages > 1 && (
+                    <div className="mt-10 flex items-center justify-center gap-3">
+                      <button
+                        onClick={() => setJournalPage((p) => Math.max(1, p - 1))}
+                        disabled={journalPage === 1}
+                        className={`flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                          journalPage === 1
+                            ? 'text-neutral-400 bg-neutral-100 cursor-not-allowed'
+                            : 'text-[#16422b] bg-white border border-neutral-200 hover:bg-neutral-100 cursor-pointer'
+                        }`}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                        <span>Previous</span>
+                      </button>
+
+                      <div className="flex items-center gap-1.5">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                          <button
+                            key={pageNum}
+                            onClick={() => setJournalPage(pageNum)}
+                            className={`w-9 h-9 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                              journalPage === pageNum
+                                ? 'bg-[#16422b] text-white shadow-sm'
+                                : 'bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200'
+                            }`}
+                          >
+                            {pageNum}
+                          </button>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => setJournalPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={journalPage === totalPages}
+                        className={`flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                          journalPage === totalPages
+                            ? 'text-neutral-400 bg-neutral-100 cursor-not-allowed'
+                            : 'text-[#16422b] bg-white border border-neutral-200 hover:bg-neutral-100 cursor-pointer'
+                        }`}
+                      >
+                        <span>Next</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })()}
 
         {/* ================= TAB 5: REFERRAL PROGRAM ================= */}
         {activeTab === 'referral' && (
@@ -735,18 +913,18 @@ export const GuidesAndFaqsPage: React.FC<GuidesAndFaqsPageProps> = ({
                   Have a specific question about your safari?
                 </h3>
                 <p className="text-xs text-neutral-600 mt-1">
-                  Our native planners in Kampala are standing by on WhatsApp to answer any question within minutes.
+                  Our native safari planners are standing by on WhatsApp to answer any question within minutes.
                 </p>
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <a
-                  href="https://wa.me/256789164360?text=Hello%20Fifty4%20Safaris%2C%20I%20have%20a%20question%20about%20my%20trip."
+                  href="https://wa.me/256764544719?text=Hello%20Fifty4%20Safaris%2C%20I%20have%20a%20question%20about%20my%20trip."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-md flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp Concierge</span>
+                  <span>WhatsApp Our Team</span>
                 </a>
               </div>
             </div>

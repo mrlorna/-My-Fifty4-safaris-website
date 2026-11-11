@@ -26,9 +26,9 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
   const [dateFlexibility, setDateFlexibility] = useState<SafariEnquiry['dateFlexibility']>('+/- 3 Days');
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
-  const [accommodationStyle, setAccommodationStyle] = useState<SafariEnquiry['accommodationStyle']>('Luxury Eco-Lodges');
+  const [accommodationStyle, setAccommodationStyle] = useState<SafariEnquiry['accommodationStyle']>('Mid-Range Comfort (Average Price)');
   const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD');
-  const [budgetPerPerson, setBudgetPerPerson] = useState('$5,000 - $7,500');
+  const [budgetPerPerson, setBudgetPerPerson] = useState('Custom Tailored');
   const [wildlifeInterests, setWildlifeInterests] = useState<string[]>([
     'Mountain Gorillas',
     'Chimpanzees'
@@ -46,14 +46,8 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
 
   if (!isOpen) return null;
 
-  const toggleDestination = (dest: string) => {
-    if (destinations.includes(dest)) {
-      if (destinations.length > 1) {
-        setDestinations(destinations.filter(d => d !== dest));
-      }
-    } else {
-      setDestinations([...destinations, dest]);
-    }
+  const selectDestination = (dest: string) => {
+    setDestinations([dest]);
   };
 
   const toggleInterest = (interest: string) => {
@@ -124,7 +118,7 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
       onSuccess(created);
     } catch (err) {
       setIsSubmitting(false);
-      setErrorMessage('Failed to save your inquiry. Please try again or message our WhatsApp concierge.');
+      setErrorMessage('Failed to save your inquiry. Please try again or message our WhatsApp support team.');
     }
   };
 
@@ -214,12 +208,12 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
 
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href={`https://wa.me/256789164360?text=Hello%20Fifty4%20Safaris%2C%20I%20just%20submitted%20trip%20inquiry%20${submittedEnquiry.referenceCode}%20for%20${submittedEnquiry.fullName}.`}
+                href={`https://wa.me/256764544719?text=Hello%20Fifty4%20Safaris%2C%20I%20just%20submitted%20trip%20inquiry%20${submittedEnquiry.referenceCode}%20for%20${submittedEnquiry.fullName}.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-[#16422b] hover:bg-[#103321] text-white text-xs font-bold uppercase tracking-wider rounded-md shadow transition-colors"
               >
-                Connect on WhatsApp Concierge
+                Connect on WhatsApp
               </a>
               <button
                 onClick={resetAndClose}
@@ -262,11 +256,14 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
             {currentStep === 1 && (
               <div className="space-y-6">
                 <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#16422b] block mb-1">
+                    Step 1 of 5 · Destination
+                  </span>
                   <h3 className="font-serif-luxury text-2xl font-bold text-[#151713] mb-1">
-                    Where would you like to explore in Africa?
+                    Choose One Country for Your Safari
                   </h3>
                   <p className="text-xs text-neutral-600">
-                    Select one or combine multiple countries for a multi-destination East Africa circuit.
+                    Select the country you want to travel to.
                   </p>
                 </div>
 
@@ -274,33 +271,33 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
                   {[
                     { name: 'Uganda', subtitle: 'Gorillas & Savannah', flag: '🇺🇬' },
                     { name: 'Kenya', subtitle: 'Masai Mara & Big 5', flag: '🇰🇪' },
-                    { name: 'Tanzania', subtitle: 'Serengeti & Zanzibar', flag: '🇹🇿' },
+                    { name: 'Tanzania', subtitle: 'Serengeti & Crater', flag: '🇹🇿' },
                     { name: 'Rwanda', subtitle: 'Virunga Volcanoes', flag: '🇷🇼' },
-                    { name: 'Zambia', subtitle: 'South Luangwa & Victoria Falls', flag: '🇿🇲' },
-                    { name: 'More Africa', subtitle: 'Botswana, Namibia, SA', flag: '🌍' }
+                    { name: 'Zanzibar & Coast', subtitle: 'Beaches & Stone Town', flag: '🏝️' },
+                    { name: 'Zambia', subtitle: 'South Luangwa & Falls', flag: '🇿🇲' }
                   ].map((item) => {
                     const isSelected = destinations.includes(item.name);
                     return (
                       <button
                         type="button"
                         key={item.name}
-                        onClick={() => toggleDestination(item.name)}
-                        className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                        onClick={() => selectDestination(item.name)}
+                        className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-white border-[#16422b] shadow-md ring-2 ring-[#16422b]/20'
-                            : 'bg-white/60 border-neutral-200 hover:border-neutral-300'
+                            ? 'bg-[#FAF7EE] border-[#16422b] shadow-md ring-2 ring-[#16422b]/30'
+                            : 'bg-white border-neutral-200 hover:border-neutral-300'
                         }`}
                       >
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center justify-between mb-1.5">
                           <span className="text-2xl">{item.flag}</span>
                           <div
-                            className={`w-5 h-5 rounded-full flex items-center justify-center border text-xs ${
+                            className={`w-4 h-4 rounded-full flex items-center justify-center border text-[10px] ${
                               isSelected
                                 ? 'bg-[#16422b] border-[#16422b] text-white'
                                 : 'border-neutral-300'
                             }`}
                           >
-                            {isSelected && <Check className="w-3 h-3" />}
+                            {isSelected && <Check className="w-2.5 h-2.5" />}
                           </div>
                         </div>
                         <p className="font-bold text-sm text-[#151713]">{item.name}</p>
@@ -308,6 +305,20 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
                       </button>
                     );
                   })}
+                </div>
+
+                {/* Places description in the chosen country */}
+                <div className="bg-[#FAF7EE]/60 p-4 rounded-xl border border-neutral-200 space-y-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-800">
+                    Places you want to visit in {destinations[0] || 'your chosen country'}:
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={additionalRequests}
+                    onChange={(e) => setAdditionalRequests(e.target.value)}
+                    placeholder={`e.g. In ${destinations[0] || 'the country'}, we would like to visit specific parks, see certain wildlife, or have a custom route in mind...`}
+                    className="w-full bg-white border border-neutral-300 rounded-lg p-2.5 text-xs text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#16422b]"
+                  />
                 </div>
               </div>
             )}
@@ -430,99 +441,79 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
               </div>
             )}
 
-            {/* STEP 3: STYLE & BUDGET */}
+            {/* STEP 3: ACCOMMODATION STYLE */}
             {currentStep === 3 && (
               <div className="space-y-6">
                 <div>
                   <h3 className="font-serif-luxury text-2xl font-bold text-[#151713] mb-1">
-                    Accommodation Tier & Target Investment
+                    Preferred Accommodation Style
                   </h3>
                   <p className="text-xs text-neutral-600">
-                    Transparent pricing including permits, private 4x4 vehicles, and full-board lodges.
+                    Select your preferred lodging comfort level. Budget is our least expensive tier, followed by our popular average price option that is not expensive but good.
                   </p>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                    Lodge Style Preference
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {[
-                      {
-                        tier: 'Mid-Range Classic Tented' as const,
-                        label: 'Classic Comfort',
-                        desc: 'Comfortable ensuite safari tents and chalets with stunning wild views.'
-                      },
-                      {
-                        tier: 'Luxury Eco-Lodges' as const,
-                        label: 'Premier Luxury (Recommended)',
-                        desc: 'Architectural forest sanctuaries, fine dining, private decks, and plunge pools.'
-                      },
-                      {
-                        tier: 'Ultra-Luxury Private Villas' as const,
-                        label: 'Ultra-Luxury / Exclusive',
-                        desc: 'Singita, Sanctuary, private butler service, and chartered bush flights.'
-                      }
-                    ].map((item) => (
-                      <button
-                        type="button"
-                        key={item.tier}
-                        onClick={() => setAccommodationStyle(item.tier)}
-                        className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
-                          accommodationStyle === item.tier
-                            ? 'bg-white border-[#16422b] shadow-md ring-2 ring-[#16422b]/20'
-                            : 'bg-white/60 border-neutral-200 hover:border-neutral-300'
-                        }`}
-                      >
-                        <p className="font-bold text-sm text-[#151713] mb-1">{item.label}</p>
-                        <p className="text-xs text-neutral-500 leading-snug">{item.desc}</p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-neutral-700">
-                      Approximate Budget Per Person (Excluding International Flights)
-                    </label>
-                    <div className="flex items-center gap-1 text-xs">
-                      {(['USD', 'EUR', 'GBP'] as const).map(curr => (
-                        <button
-                          key={curr}
-                          type="button"
-                          onClick={() => setCurrency(curr)}
-                          className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                            currency === curr ? 'bg-[#16422b] text-white' : 'bg-neutral-200 text-neutral-700'
+                <div className="space-y-3">
+                  {[
+                    {
+                      tier: 'Budget Safari Accommodation' as const,
+                      label: 'Budget Safari Accommodation',
+                      tag: 'Least Expensive',
+                      tagBg: 'bg-amber-100 text-amber-800 border-amber-200',
+                      desc: 'The least expensive tier — clean, comfortable safari guest lodges and eco-camps with en-suite private bathrooms and hearty local meals. Ideal for cost-conscious adventurers.'
+                    },
+                    {
+                      tier: 'Mid-Range Comfort (Average Price)' as const,
+                      label: 'Mid-Range Comfort (Average Price)',
+                      tag: 'Not Expensive, But Good',
+                      tagBg: 'bg-emerald-100 text-[#16422b] border-emerald-200',
+                      desc: 'Average price, not expensive but good — handpicked classic safari lodges and permanent tented camps with swimming pools, hot showers, delicious meals, and great wilderness views at exceptional value.'
+                    },
+                    {
+                      tier: 'Luxury Eco-Lodges' as const,
+                      label: 'Luxury Eco-Lodges',
+                      tag: 'Premium Luxury',
+                      tagBg: 'bg-neutral-100 text-neutral-800 border-neutral-200',
+                      desc: 'Refined wilderness retreats with private scenic viewing decks, en-suite bathrooms, gourmet multi-course dining, and prime in-park locations.'
+                    },
+                    {
+                      tier: 'Ultra-Luxury Private Villas' as const,
+                      label: 'Ultra-Luxury Private Sanctuaries',
+                      tag: 'World-Class Exclusivity',
+                      tagBg: 'bg-neutral-900 text-amber-300 border-neutral-700',
+                      desc: 'Exclusive-use private villas with dedicated personal butler service, private chefs, and chartered bush flight options.'
+                    }
+                  ].map((item) => (
+                    <button
+                      type="button"
+                      key={item.tier}
+                      onClick={() => setAccommodationStyle(item.tier)}
+                      className={`w-full p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                        accommodationStyle === item.tier
+                          ? 'bg-[#FAF7EE] border-[#16422b] shadow-xs ring-2 ring-[#16422b]/20'
+                          : 'bg-white border-neutral-200 hover:border-neutral-300'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
+                        <div className="flex items-center gap-2">
+                          <p className="font-bold text-sm text-[#151713]">{item.label}</p>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${item.tagBg}`}>
+                            {item.tag}
+                          </span>
+                        </div>
+                        <span
+                          className={`w-5 h-5 rounded-full border flex items-center justify-center text-xs font-bold ${
+                            accommodationStyle === item.tier
+                              ? 'bg-[#16422b] border-[#16422b] text-white'
+                              : 'border-neutral-300'
                           }`}
                         >
-                          {curr}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {[
-                      '$3,500 - $5,000',
-                      '$5,000 - $7,500',
-                      '$7,500 - $10,000',
-                      '$10,000+'
-                    ].map((b) => (
-                      <button
-                        type="button"
-                        key={b}
-                        onClick={() => setBudgetPerPerson(b)}
-                        className={`py-3 px-3 text-xs font-bold rounded-lg border text-center transition-all cursor-pointer ${
-                          budgetPerPerson === b
-                            ? 'bg-[#151713] text-[#FAF7F2] border-[#151713]'
-                            : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
-                        }`}
-                      >
-                        {b}
-                      </button>
-                    ))}
-                  </div>
+                          {accommodationStyle === item.tier && '✓'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-neutral-600 leading-relaxed">{item.desc}</p>
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
@@ -672,8 +663,8 @@ export const TailorYourTripModal: React.FC<TailorYourTripModalProps> = ({
                     <span className="font-semibold text-neutral-800">{departureDate || 'Dates open'} ({dateFlexibility})</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Tier & Budget:</span>
-                    <span className="font-semibold text-neutral-800">{accommodationStyle} · {budgetPerPerson} {currency}</span>
+                    <span className="text-neutral-500">Accommodation Style:</span>
+                    <span className="font-semibold text-neutral-800">{accommodationStyle}</span>
                   </div>
                 </div>
 

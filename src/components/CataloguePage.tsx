@@ -360,10 +360,10 @@ export const CataloguePage: React.FC<CataloguePageProps> = ({
                   Need Help Deciding?
                 </span>
                 <p className="text-xs text-neutral-600 mb-2 leading-relaxed">
-                  Our safari architects in Kampala can recommend an itinerary tailored to your dates.
+                  Our safari team can recommend an itinerary tailored to your dates.
                 </p>
                 <a
-                  href="https://wa.me/256700545454?text=Hello%20Fifty4%20Safaris%2C%20I%20need%20help%20choosing%20a%20tour."
+                  href="https://wa.me/256764544719?text=Hello%20Fifty4%20Safaris%2C%20I%20need%20help%20choosing%20a%20tour."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-semibold rounded transition-colors"
@@ -382,7 +382,7 @@ export const CataloguePage: React.FC<CataloguePageProps> = ({
                   No Safaris Match Your Exact Filter
                 </p>
                 <p className="text-xs text-neutral-600 max-w-md mx-auto mb-6">
-                  Try adjusting your duration, price limit, or selected category. Alternatively, let our concierge design a fully customized route for you.
+                  Try adjusting your duration or selected category. Alternatively, let our safari team design a fully customized trip for you.
                 </p>
                 <div className="flex justify-center gap-3">
                   <button

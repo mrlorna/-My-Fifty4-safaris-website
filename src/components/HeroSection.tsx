@@ -34,63 +34,63 @@ interface HeroSlide {
 
 const HERO_SLIDES: HeroSlide[] = [
   {
-    image: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
-    badgeTop: 'Save up to',
-    badgeAmount: '$500',
-    badgeBottom: 'Per Person',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.27_7c0bed82.jpeg',
+    badgeTop: 'Authentic',
+    badgeAmount: 'Safaris',
+    badgeBottom: '100% Native Guides',
     badgeBg: 'bg-[#FAF7EE]',
     badgeText: 'text-[#16422b]',
     badgeBorder: 'border-[#16422b]',
     ringBorder: 'border-[#FAF7EE]/70',
-    title: '2027 Uganda Gorillas',
-    pillHighlight: 'Guaranteed Gorilla Permits Included',
-    pillSubtext: 'From $2,190 · Instant Lock',
-    caption: 'Official UWA permit allocations secured directly in your passport name with zero broker markup.',
+    title: 'Uganda Gorillas & Misty Highlands',
+    pillHighlight: 'Gorilla Trekking In Bwindi',
+    pillSubtext: 'Direct Permit Booking',
+    caption: 'Experience face-to-face mountain gorilla encounters in ancient misty rainforests with local guides who know every trail.',
     destinationKey: 'Uganda'
   },
   {
     image: '/src/assets/images/serengeti_great_migration_1792866692098.jpg',
-    badgeTop: 'Peak Season',
-    badgeAmount: 'Migration',
-    badgeBottom: 'Special',
+    badgeTop: 'Endless',
+    badgeAmount: 'Plains',
+    badgeBottom: 'Great Migration',
     badgeBg: 'bg-[#16422b]',
     badgeText: 'text-[#FAF7EE]',
     badgeBorder: 'border-[#FAF7EE]',
     ringBorder: 'border-[#FAF7EE]/60',
-    title: '2027 Serengeti & Mara',
+    title: 'Serengeti & Masai Mara Horizons',
     pillHighlight: 'Witness The Great Migration Live',
-    pillSubtext: 'From $2,300 · Front-Row Camps',
-    caption: 'Front-row luxury mobile tented camps overlooking iconic Mara river crossings.',
+    pillSubtext: 'Front-Row Tented Camps',
+    caption: 'Follow millions of wildebeest and zebras across untamed golden savannahs with front-row private safari camps.',
     destinationKey: 'Tanzania'
   },
   {
-    image: '/src/assets/images/queen_elizabeth_savannah_lions_1792866692167.jpg',
-    badgeTop: 'Early Booking',
-    badgeAmount: '15% Off',
-    badgeBottom: 'Limited Slots',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.24_b621a8a6.jpeg',
+    badgeTop: 'Custom',
+    badgeAmount: '4x4',
+    badgeBottom: 'Private Expeditions',
     badgeBg: 'bg-[#FAF7EE]',
     badgeText: 'text-[#16422b]',
     badgeBorder: 'border-[#16422b]',
     ringBorder: 'border-[#FAF7EE]/70',
-    title: '2027 Climbing Lions & Nile',
-    pillHighlight: 'Tree-Climbing Lions & Kazinga Cruises',
-    pillSubtext: 'From $1,890 · Private 4x4',
-    caption: 'Private custom 4x4 pop-up roof Land Cruisers with native naturalist driver-guides.',
+    title: 'Queen Elizabeth & Kazinga Channel',
+    pillHighlight: 'Wild Elephant Herds & Boat Cruises',
+    pillSubtext: 'Pop-Up Roof Cruisers',
+    caption: 'Watch elephants bathe at sunrise and spot rare tree-climbing lions in Ishasha from custom safari vehicles.',
     destinationKey: 'Uganda'
   },
   {
-    image: '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg',
-    badgeTop: 'Exclusive',
-    badgeAmount: 'VIP Eco',
-    badgeBottom: 'Lodges',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.28_4acce011.jpeg',
+    badgeTop: 'Canopy',
+    badgeAmount: 'Treks',
+    badgeBottom: 'Primates & Peaks',
     badgeBg: 'bg-[#0f2e1e]',
     badgeText: 'text-white',
     badgeBorder: 'border-[#FAF7EE]',
     ringBorder: 'border-[#FAF7EE]/60',
-    title: '2027 Rwanda & Primates',
-    pillHighlight: 'Volcanoes Gorillas & VIP Eco-Lodges',
-    pillSubtext: 'From $2,450 · Handcrafted',
-    caption: 'Handcrafted retreats overlooking dramatic volcanic caldera ridges and misty rainforests.',
+    title: 'Rwanda Volcanoes & Nyungwe Forests',
+    pillHighlight: 'Golden Monkeys & Canopy Walks',
+    pillSubtext: 'Boutique Eco-Lodges',
+    caption: 'Walk suspended above emerald rainforest canopies and track golden monkeys along dramatic volcanic slopes.',
     destinationKey: 'Rwanda'
   }
 ];
@@ -328,19 +328,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               Contact Us
             </h3>
             <p className="text-xs text-white/95 mt-0.5">
-              Questions? Call our Kampala wildlife safari concierges directly.
+              Questions? Call our friendly safari team directly.
             </p>
           </div>
 
           {/* Right: Phone + Vertical divider + Button */}
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <a
-              href="tel:+256789164360"
-              className="flex items-center gap-2 text-white hover:text-[#FAF7EE] transition-colors"
+              href="https://wa.me/256764544719?text=Hello%20Fifty4%20Safaris%2C%20I%20would%20like%20to%20plan%20a%20trip"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-white hover:text-emerald-300 transition-colors"
+              title="Chat on WhatsApp: +256764544719"
             >
-              <Phone className="w-5 h-5 fill-current text-[#FAF7EE]" />
+              <svg className="w-6 h-6 text-[#25D366] fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+              </svg>
               <span className="font-serif-luxury text-xl sm:text-2xl font-bold tracking-wide">
-                +256 789 164 360
+                +256764544719
               </span>
             </a>
 

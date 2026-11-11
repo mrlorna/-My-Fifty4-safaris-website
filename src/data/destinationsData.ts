@@ -124,7 +124,7 @@ export const DESTINATIONS_DATA: DestinationInfo[] = [
       'A model of environmental recovery and luxury primate conservation, offering world-class mountain gorilla tracking and pristine rainforested peaks.',
     description:
       'Rwanda represents the pinnacle of modern luxury conservation. Known as the Land of a Thousand Hills, this clean, orderly, and deeply hospitable nation invites travelers to explore the dramatic Virunga Volcanoes, ancient montane forests of Nyungwe with chimpanzees and golden monkeys, and the savannah Big Five of Akagera.',
-    coverImage: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
+    coverImage: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.28_4acce011.jpeg',
     bestTimeToVisit: 'June to mid-September and mid-December to February for the dry season tracking conditions.',
     wildlifeHighlights: [
       'Mountain Gorillas in Volcanoes National Park',
@@ -185,7 +185,7 @@ export const DESTINATIONS_DATA: DestinationInfo[] = [
       'The quintessential post-safari retreat: pristine coral reefs, Stone Town UNESCO heritage, and secluded Indian Ocean beachfront villas.',
     description:
       'After the exhilaration of tracking primates in Bwindi or witnessing big cats on the savannah, Zanzibar offers the ultimate decompression. Known as the Spice Island, it enchants with fragrant clove plantations, labyrinthine Stone Town alleys, dhow sailing at golden hour, and powdery white sand beaches lapped by warm azure waters.',
-    coverImage: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/src/assets/images/zanzibar_swimming_snorkeling_1794315665581.jpg',
     bestTimeToVisit: 'June to October and December to February offer warm sunny days with minimal rainfall and calm sea conditions for snorkeling and scuba diving.',
     wildlifeHighlights: [
       'Green sea turtles & dolphins off Mnemba Atoll',
@@ -246,7 +246,7 @@ export const DESTINATIONS_DATA: DestinationInfo[] = [
     summary:
       'Custom safari design covering Botswana’s Okavango Delta, Namibia’s Sossusvlei dunes, and South Africa’s Cape & Kruger.',
     description:
-      'Fifty4 Safaris is built on the vision of Africa’s 54 countries. While our primary operational headquarters are based in Uganda with established hubs across East Africa, our bespoke concierge curates verified custom itineraries to Botswana, Namibia, South Africa, and Madagascar through our vetted conservation partner network.',
+      'Fifty4 Safaris is built on the vision of Africa’s 54 countries. While our primary operational headquarters are based in Uganda with established hubs across East Africa, our dedicated travel team curates verified custom itineraries to Botswana, Namibia, South Africa, and Madagascar through our vetted conservation partner network.',
     coverImage: '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg',
     bestTimeToVisit: 'Region-dependent. Southern Africa dry season is June to October.',
     wildlifeHighlights: [
@@ -263,7 +263,7 @@ export const DESTINATIONS_DATA: DestinationInfo[] = [
     entryRequirements: 'Country specific. Our safari planners provide verified visa guidance for each multi-country itinerary.',
     travelTips: [
       'Trips to southern Africa can be seamlessly linked with East Africa via direct flights between Nairobi/Entebbe and Johannesburg.',
-      'Contact our concierge to check live lodge availability and bespoke pricing.'
+      'Contact our safari team to check availability and plan your trip.'
     ],
     isLaunchDestination: false,
     featuredToursCount: 1

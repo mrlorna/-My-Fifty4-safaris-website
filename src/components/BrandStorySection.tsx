@@ -19,9 +19,9 @@ export const BrandStorySection: React.FC<BrandStorySectionProps> = ({
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-neutral-200">
               <img
-                src="/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg"
-                alt="Fifty4 Safaris luxury eco-lodge veranda overlooking misty African mountains"
-                className="w-full h-[480px] object-cover"
+                src="/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.27_7c0bed82.jpeg"
+                alt="Fifty4 Safaris custom 4x4 Land Cruiser exploring Uganda highlands"
+                className="w-full h-[480px] object-cover filter brightness-100 contrast-105"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -42,9 +42,9 @@ export const BrandStorySection: React.FC<BrandStorySectionProps> = ({
             <div className="hidden sm:block absolute -bottom-6 -right-6 bg-white p-5 rounded-xl shadow-xl border border-neutral-200 max-w-xs">
               <div className="flex items-center gap-3 mb-2">
                 <img
-                  src="/fifty4-logo.png"
-                  alt="Fifty4 Safaris official logo"
-                  className="h-9 w-auto object-contain"
+                  src="/fifty4-lion-symbol.png"
+                  alt="Fifty4 Safaris Emblem"
+                  className="h-10 w-auto object-contain"
                 />
                 <div>
                   <h4 className="text-sm font-bold text-[#151713]">Fifty4 Safaris Ltd</h4>

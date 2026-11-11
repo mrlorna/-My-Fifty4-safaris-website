@@ -57,10 +57,10 @@ export const TOURS_DATA: TourPackage[] = [
     isFlagship: true,
     coverImage: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
     galleryImages: [
-      '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
-      '/src/assets/images/queen_elizabeth_savannah_lions_1792866692167.jpg',
-      '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg',
-      '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.27_7c0bed82.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.24_b621a8a6.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.25__1__c8e2246c.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.19_ca7d42bb.jpeg',
     ],
     overview:
       'Fifty4 Safaris’ premier flagship journey unites Africa’s two most transformative wildlife experiences: an awe-inspiring trek through Bwindi Impenetrable Forest to stand mere meters from wild mountain gorillas, followed by savannah game drives tracking tree-climbing lions in Queen Elizabeth National Park. Curated with private 4x4 Land Cruisers, expert Uganda Wildlife Authority rangers, and eco-luxury forest lodges.',
@@ -78,10 +78,10 @@ export const TOURS_DATA: TourPackage[] = [
         title: 'Arrival at Entebbe & Lake Victoria Welcome',
         location: 'Entebbe, Uganda',
         description:
-          'Upon landing at Entebbe International Airport (EBB), your Fifty4 Safaris private concierge greets you inside the arrivals lounge with VIP airport assistance. Enjoy a comfortable private transfer to your boutique lodge overlooking Lake Victoria. Relax after your flight with a welcome dinner and comprehensive safari orientation from your lead naturalist guide.',
-        accommodation: 'Hotel No.5 / The Boma Entebbe',
+          'Upon arrival at Entebbe International Airport (EBB), your Fifty4 Safaris guide will warmly welcome you from the airport arrivals and take you to your hotel overlooking Lake Victoria. Relax after your flight, enjoy dinner, and hear about what to expect on your upcoming safari days.',
+        accommodation: 'Entebbe Hotel / Guest Lodge',
         mealPlan: 'Dinner included',
-        highlights: ['VIP airport meet & greet', 'Lake Victoria sunset view', 'Comprehensive expedition briefing']
+        highlights: ['Airport welcome & pickup', 'Lake Victoria sunset view', 'Safari briefing']
       },
       {
         day: 2,
@@ -360,15 +360,17 @@ export const TOURS_DATA: TourPackage[] = [
     priceUSD: 6850,
     priceNote: 'Per person sharing, includes $1,500 Rwanda Gorilla Tracking Permit',
     isVerifiedPrice: true,
-    coverImage: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
+    coverImage: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.28_4acce011.jpeg',
     galleryImages: [
-      '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
-      '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg'
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.28_4acce011.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.33__2__7ea993f5.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.27__2__3de81b61.jpeg'
     ],
     overview:
-      'Immerse yourself in Rwanda’s dramatic volcanic landscape. Track mountain gorillas in Volcanoes National Park under the shadow of dramatic peaks, encounter endangered golden monkeys in bamboo forests, and discover Kigali’s inspiring renaissance with curated cultural experiences.',
+      'Immerse yourself in Rwanda’s dramatic volcanic landscape. Track mountain gorillas in Volcanoes National Park under the shadow of dramatic peaks, encounter endangered golden monkeys in bamboo forests, walk the breathtaking Nyungwe rainforest suspension bridge, and discover Kigali’s inspiring renaissance with curated cultural experiences.',
     highlights: [
       'Official Rwanda Mountain Gorilla Permit in Volcanoes National Park ($1,500 value)',
+      'Nyungwe National Park treetop suspension canopy walk',
       'Golden monkey tracking in high-altitude bamboo groves',
       'Private guided tour of Kigali Genocide Memorial and modern art scene',
       'Helicopter or luxury private 4x4 transfers through rolling green hills',
@@ -458,10 +460,11 @@ export const TOURS_DATA: TourPackage[] = [
     priceUSD: 2890,
     priceNote: 'Per person sharing, includes boat safaris and chimp permit in Budongo',
     isVerifiedPrice: true,
-    coverImage: '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg',
+    coverImage: '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.44_d27ead9b.jpeg',
     galleryImages: [
-      '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg',
-      '/src/assets/images/queen_elizabeth_savannah_lions_1792866692167.jpg'
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.44_d27ead9b.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.38__1__741c8dd3.jpeg',
+      '/assets/aistudio/WhatsApp_Image_2026-11-10_at_12.51.36_9157f7fe.jpeg'
     ],
     overview:
       'Experience Uganda’s largest and oldest national park. Feel the ground tremble as the mighty Victoria Nile funnels violently through a 7-meter gorge before plunging 43 meters into the "Devil’s Cauldron". Track the Big Five, cruise past Nile crocodiles, and spot rare Shoebill storks.',
@@ -672,11 +675,11 @@ export const TOURS_DATA: TourPackage[] = [
     priceUSD: 6980,
     priceNote: 'Per person sharing, includes Gorilla permit, domestic flights, and Zanzibar private villa',
     isVerifiedPrice: true,
-    coverImage: '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
+    coverImage: '/src/assets/images/zanzibar_swimming_snorkeling_1794315665581.jpg',
     galleryImages: [
+      '/src/assets/images/zanzibar_swimming_snorkeling_1794315665581.jpg',
       '/src/assets/images/gorilla_bwindi_silverback_1792866690807.jpg',
-      '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg',
-      '/src/assets/images/hero_uganda_safari_landscape_1792866690847.jpg'
+      '/src/assets/images/luxury_safari_lodge_view_1792866692401.jpg'
     ],
     overview:
       'The definitive romantic African escape: spend 5 days in Uganda’s mist-shrouded rainforest tracking mountain gorillas and tree-climbing lions, then catch a flight to the spice island of Zanzibar for 5 blissful nights in a private beachfront villa surrounded by turquoise waters.',
